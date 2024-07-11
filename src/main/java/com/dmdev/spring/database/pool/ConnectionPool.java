@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
-@Component("pool1")
+@Component
 public class ConnectionPool {
     private final String username;
     private final Integer poolSize;
