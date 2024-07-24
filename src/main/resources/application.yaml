@@ -18,3 +18,12 @@ db:
       timeout: 2
     - size: 3
       timeout: 3
+
+logging:
+  level:
+    root: WARN
+    com.dmdev.spring.database.pool.ConnectionPool: INFO
+#    включили запись в файл
+  file:
+    name: dmdev.log
+    path: /
