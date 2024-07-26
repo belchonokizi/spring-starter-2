@@ -20,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+//чтобы моки подтянулись
 @ExtendWith(MockitoExtension.class)
 class CompanyServiceTest {
     private static final Integer COMPANY_ID = 1;
