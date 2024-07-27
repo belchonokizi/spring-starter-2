@@ -14,6 +14,7 @@ import org.springframework.context.ApplicationEventPublisher;
 
 import javax.swing.text.html.Option;
 
+import java.util.Collections;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -38,7 +39,7 @@ class CompanyServiceTest {
     @Test
     void findById() {
         when(companyRepository.findById(COMPANY_ID))
-                .thenReturn(Optional.of(new Company(COMPANY_ID)));
+                .thenReturn(Optional.of(new Company(COMPANY_ID, null, Collections.emptyMap())));
 
         Optional<CompanyReadDTO> actualResult = companyService.findById(COMPANY_ID);
 

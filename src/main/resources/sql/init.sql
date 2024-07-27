@@ -35,7 +35,7 @@ create table if not exists chat(
 
 CREATE TABLE IF NOT EXISTS users_chat(
     id BIGSERIAL PRIMARY KEY ,
-    user_id bigint not null references users (id),
+    user_id bigint not null references users(id),
     chat_id bigint not null references chat (id),
     unique (user_id, chat_id)
 );

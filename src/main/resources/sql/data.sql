@@ -3,6 +3,19 @@ VALUES ('Google'),
        ('Meta'),
        ('Amazon');
 
+select
+    cl.company_id,
+    cl.description,
+    cl.lang
+from
+    company_locales cl;
+
+select
+    c.company_name,
+    c."id"
+from
+    company c;
+
 INSERT INTO company_locales (company_id, lang, description)
 VALUES ((SELECT id FROM company WHERE company_name = 'Google'), 'en', 'Google description'),
        ((SELECT id FROM company WHERE company_name = 'Google'), 'ru', 'Google описание'),
@@ -35,6 +48,13 @@ VALUES ('dmdev'),
        ('java'),
        ('database');
 
+select
+    uc.chat_id,
+    uc."id",
+    uc.user_id
+from
+    users_chat uc;
+
 INSERT INTO users_chat(user_id, chat_id)
 VALUES ((SELECT id FROM users WHERE username = 'petr@gmail.com'), (SELECT id FROM chat WHERE chat_name = 'dmdev')),
        ((SELECT id FROM users WHERE username = 'sveta@gmail.com'), (SELECT id FROM chat WHERE chat_name = 'dmdev')),
@@ -44,3 +64,24 @@ VALUES ((SELECT id FROM users WHERE username = 'petr@gmail.com'), (SELECT id FRO
        ((SELECT id FROM users WHERE username = 'kate@gmail.com'), (SELECT id FROM chat WHERE chat_name = 'java')),
        ((SELECT id FROM users WHERE username = 'petr@gmail.com'), (SELECT id FROM chat WHERE chat_name = 'database')),
        ((SELECT id FROM users WHERE username = 'kate@gmail.com'), (SELECT id FROM chat WHERE chat_name = 'database'));
+
+select
+    c.chat_name,
+    c."id"
+from
+    chat c;
+
+select
+    u.birth_date,
+    u.company_id,
+    u.created_at,
+    u.created_by,
+    u.firstname,
+    u."id",
+    u.lastname,
+    u.modified_at,
+    u.modified_by,
+    u."role",
+    u.username
+from
+    users u;
