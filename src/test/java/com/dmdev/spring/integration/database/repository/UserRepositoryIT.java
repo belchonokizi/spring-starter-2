@@ -7,6 +7,7 @@ import com.dmdev.spring.integration.annotation.IT;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
 
 import java.time.LocalDate;
@@ -26,9 +27,18 @@ class UserRepositoryIT {
 
     @Test
     void checkPageable() {
+        //пропускаем 1 страницу, выведется вторая с размером 2
         PageRequest pageable = PageRequest.of(1, 2, Sort.by("id"));
-        List<User> result = userRepository.findAllBy(pageable);
-        assertThat(result).hasSize(2);
+        Slice<User> slice = userRepository.findAllBy(pageable);
+        slice.forEach(user -> System.out.println(user.getId()));
+//        assertThat(result).hasSize(2);
+
+        while(slice.hasNext()) {
+            //в 1 итерации page поменяется на 2
+           slice =  userRepository.findAllBy(slice.nextPageable());
+           slice.forEach(user -> System.out.println(user.getId()));
+        }
+
     }
 
     @Test

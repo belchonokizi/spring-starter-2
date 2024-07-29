@@ -2,7 +2,9 @@ package com.dmdev.spring.database.repository;
 
 import com.dmdev.spring.database.entity.Role;
 import com.dmdev.spring.database.entity.User;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -33,6 +35,17 @@ public interface UserRepository extends JpaRepository<User, Long> {
     int updateRole(Role role, Long... ids);
 
     Optional<User> findTopByOrderByIdDesc();
+
     List<User> findTop3ByBirthDateBefore(LocalDate birthDate, Sort sort);
-    List<User> findAllBy(Pageable pageable);
+
+    Slice<User> findAllBy(Pageable pageable);
+
+    /**
+     * При работе с Page есть доп запрос на count, если нам нужно отражать количество страничек
+     * Дефолтный запрос можно изменить в запросе @Query
+    @Query(value = "select u from User u",
+            countQuery = "select count(distinct u.firstname) from User u")
+    Page<User> findAllBy(Pageable pageable);
+    **/
+
 }
