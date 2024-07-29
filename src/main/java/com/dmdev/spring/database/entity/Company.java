@@ -1,15 +1,22 @@
 package com.dmdev.spring.database.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
-@Data
+//названия параметров здесь должны совпадать с параметрами метода
+@NamedQuery(
+        name = "Company.findByCompanyName",
+        query = "select c from Company c where " +
+                "lower(c.companyName) = lower(:companyName)"
+)
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -32,4 +39,16 @@ public class Company implements BaseEntity<Integer> {
     @Column(name = "description")
     private Map<String, String> locales = new HashMap<>();
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Company company = (Company) o;
+        return getId() != null && Objects.equals(getId(), company.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

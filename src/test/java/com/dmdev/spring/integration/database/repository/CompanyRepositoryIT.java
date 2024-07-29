@@ -7,6 +7,7 @@ import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,6 +19,14 @@ class CompanyRepositoryIT {
 
     private final EntityManager entityManager;
     private final CompanyRepository companyRepository;
+
+    @Test
+    void checkFindByQueries() {
+        Optional<Company> google = companyRepository.findByCompanyName("google");
+        assertTrue(google.isPresent());
+        List<Company> aCompanies = companyRepository.findAllByCompanyNameContainingIgnoreCase("a");
+        assertEquals(3, aCompanies.size());
+    }
 
     @Test
     void delete() {
