@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @IT
@@ -22,10 +23,10 @@ class CompanyRepositoryIT {
 
     @Test
     void checkFindByQueries() {
-        Optional<Company> google = companyRepository.findByCompanyName("google");
+        Optional<Company> google = companyRepository.findByCompanyName("Google");
         assertTrue(google.isPresent());
         List<Company> aCompanies = companyRepository.findAllByCompanyNameContainingIgnoreCase("a");
-        assertEquals(3, aCompanies.size());
+        assertThat(aCompanies).hasSize(3);
     }
 
     @Test
@@ -41,7 +42,7 @@ class CompanyRepositoryIT {
     void findById() {
         Company company = entityManager.find(Company.class, 1);
         assertNotNull(company);
-        assertEquals(2, company.getLocales().size());
+        assertThat(company.getLocales()).hasSize(2);
     }
 
 }

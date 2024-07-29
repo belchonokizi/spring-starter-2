@@ -12,7 +12,7 @@ public interface CompanyRepository extends JpaRepository<Company, Integer> {
     //SimpleJpaQuery
     //join fetch возможен только с ним
     @Query("select c from Company c " +
-           "join fetch c.locales cl " +
+//           "join fetch c.locales cl " +
            "where c.companyName = :companyName")
     Optional<Company> findByCompanyName(String companyName);
 
