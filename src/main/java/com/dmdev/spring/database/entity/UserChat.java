@@ -21,6 +21,9 @@ public class UserChat implements BaseEntity<Long> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /** ManyToMany реализовали через ManyToOne в этом классе
+     * и OneToMany в классах Chat и User
+     * **/
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
