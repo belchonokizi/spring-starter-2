@@ -9,6 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * для работы с именованными графами
+@NamedEntityGraph(name = "User.company",
+        название поля в сущности
+        attributeNodes = @NamedAttributeNode("company"))
+ **/
 @Getter
 @Setter
 @ToString

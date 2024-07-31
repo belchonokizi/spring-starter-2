@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -38,14 +39,20 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     List<User> findTop3ByBirthDateBefore(LocalDate birthDate, Sort sort);
 
-    Slice<User> findAllBy(Pageable pageable);
+//    Slice<User> findAllBy(Pageable pageable);
 
     /**
      * При работе с Page есть доп запрос на count, если нам нужно отражать количество страничек
      * Дефолтный запрос можно изменить в запросе @Query
+     * @EntityGraph("User.company") - избавляет от доп запросов на company,
+     * что повышает производительность, но работа с именованными графами не предпочтительна
+     * **/
+//    описываем, какие свойства надо подтягивать
+    @EntityGraph(attributePaths = {"company", "company.locales"})
     @Query(value = "select u from User u",
             countQuery = "select count(distinct u.firstname) from User u")
+    //Page c @EntityGraph не будет корректно работать!
     Page<User> findAllBy(Pageable pageable);
-    **/
+
 
 }
