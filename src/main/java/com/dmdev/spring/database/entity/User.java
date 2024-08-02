@@ -3,6 +3,9 @@ package com.dmdev.spring.database.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
+import org.hibernate.envers.RelationTargetAuditMode;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -11,9 +14,10 @@ import java.util.Objects;
 
 /**
  * для работы с именованными графами
-@NamedEntityGraph(name = "User.company",
-        название поля в сущности
-        attributeNodes = @NamedAttributeNode("company"))
+ *
+ * @NamedEntityGraph(name = "User.company",
+ * название поля в сущности
+ * attributeNodes = @NamedAttributeNode("company"))
  **/
 @Getter
 @Setter
@@ -23,6 +27,8 @@ import java.util.Objects;
 @Builder
 @Entity
 @Table(name = "users")
+//RelationTargetAuditMode.NOT_AUDITED - чтобы связанные сущности не аудировались
+@Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
 public class User extends AuditingEntity<Long> {
 
     @Id
@@ -51,6 +57,8 @@ public class User extends AuditingEntity<Long> {
     @Builder.Default
     @OneToMany(mappedBy = "user")
     @ToString.Exclude
+//    отключение аудита
+    @NotAudited
     private List<UserChat> userChats = new ArrayList<>();
 
     @Override
