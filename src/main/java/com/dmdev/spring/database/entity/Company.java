@@ -1,7 +1,7 @@
 package com.dmdev.spring.database.entity;
 
-import jakarta.persistence.*;
 import lombok.*;
+import javax.persistence.*;
 import org.hibernate.Hibernate;
 
 import java.util.HashMap;

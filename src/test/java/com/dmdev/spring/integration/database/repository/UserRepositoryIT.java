@@ -91,7 +91,7 @@ class UserRepositoryIT {
 
     @Test
     void checkUpdate() {
-        User user = userRepository.getReferenceById(2L);
+        User user = userRepository.getById(2L);
         assertEquals(Role.ADMIN, user.getRole());
 
         int resultCount = userRepository.updateRole(Role.USER, 2L, 5L);
@@ -103,7 +103,7 @@ class UserRepositoryIT {
          * после чистки старыми сущностями (user) пользоваться нельзя или
          * нужно заново положить в PersistenceContext
          **/
-        User userSame = userRepository.getReferenceById(2L);
+        User userSame = userRepository.getById(2L);
         assertEquals(Role.USER, userSame.getRole());
     }
 }
