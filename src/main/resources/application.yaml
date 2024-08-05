@@ -35,6 +35,7 @@ logging:
   level:
     root: INFO
     com.dmdev.spring.database.pool.ConnectionPool: INFO
+    org.springframework.jdbc.core : DEBUG
 #    включили запись в файл
   file:
     name: dmdev.log

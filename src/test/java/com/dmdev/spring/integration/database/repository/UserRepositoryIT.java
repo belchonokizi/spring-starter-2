@@ -3,6 +3,7 @@ package com.dmdev.spring.integration.database.repository;
 import com.dmdev.spring.database.entity.Role;
 import com.dmdev.spring.database.entity.User;
 import com.dmdev.spring.database.repository.UserRepository;
+import com.dmdev.spring.dto.PersonalInfo;
 import com.dmdev.spring.dto.PersonalInfo2;
 import com.dmdev.spring.dto.UserFilter;
 import com.dmdev.spring.integration.annotation.IT;
@@ -28,13 +29,18 @@ class UserRepositoryIT {
     private final UserRepository userRepository;
 
     @Test
+    void checkJdbcTemplate() {
+        List<PersonalInfo> users = userRepository.findAllByCompanyIdAndRole(1, Role.USER);
+        assertThat(users).hasSize(1);
+    }
+
+    @Test
     @Commit
     void checkAuditing() {
         User user = userRepository.findById(2L).get();
         user.setBirthDate(user.getBirthDate().plusYears(1L));
         //чтобы накатить изменения
         userRepository.flush();
-        System.out.println();
     }
 
     @Test
