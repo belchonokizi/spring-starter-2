@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.*;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.history.RevisionRepository;
 import org.springframework.stereotype.Repository;
 
@@ -20,7 +21,8 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long>,
         FilterUserRepository,
 //чтобы доставать данные о ревизии, нужно реализовать этот интерфейс
-        RevisionRepository<User, Long, Integer> {
+        RevisionRepository<User, Long, Integer>,
+        QuerydslPredicateExecutor<User> {
 
     //% -используются для containing
     //SimpleJpaQuery - более предпочтительный способ
