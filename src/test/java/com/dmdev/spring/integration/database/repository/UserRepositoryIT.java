@@ -6,13 +6,12 @@ import com.dmdev.spring.database.repository.UserRepository;
 import com.dmdev.spring.dto.PersonalInfo;
 import com.dmdev.spring.dto.PersonalInfo2;
 import com.dmdev.spring.dto.UserFilter;
-import com.dmdev.spring.integration.annotation.IT;
+import com.dmdev.spring.integration.IntegrationTestBase;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.test.annotation.Commit;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -22,9 +21,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@IT
 @RequiredArgsConstructor
-class UserRepositoryIT {
+class UserRepositoryIT extends IntegrationTestBase {
 
     private final UserRepository userRepository;
 
@@ -42,7 +40,6 @@ class UserRepositoryIT {
     }
 
     @Test
-    @Commit
     void checkAuditing() {
         User user = userRepository.findById(2L).get();
         user.setBirthDate(user.getBirthDate().plusYears(1L));
@@ -56,7 +53,7 @@ class UserRepositoryIT {
                 null, "ov", LocalDate.now()
         );
         List<User> users = userRepository.findAllByFilter(filter);
-        assertThat(users).hasSize(3);
+        assertThat(users).hasSize(4);
     }
 
     @Test
@@ -93,19 +90,19 @@ class UserRepositoryIT {
     void checkFirst() {
         Optional<User> top = userRepository.findTopByOrderByIdDesc();
         assertTrue(top.isPresent());
-        top.ifPresent(user -> assertEquals(6, user.getId()));
+        top.ifPresent(user -> assertEquals(5, user.getId()));
     }
 
     @Test
     void checkQueries() {
         List<User> users = userRepository.findAllBy("a", "ov");
-        assertThat(users).hasSize(2);
+        assertThat(users).hasSize(3);
     }
 
     @Test
     void checkUpdate() {
         User user = userRepository.getById(2L);
-        assertEquals(Role.ADMIN, user.getRole());
+        assertEquals(Role.USER, user.getRole());
 
         int resultCount = userRepository.updateRole(Role.USER, 2L, 5L);
         assertEquals(2, resultCount);
