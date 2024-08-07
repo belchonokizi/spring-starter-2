@@ -9,7 +9,7 @@ create table if not exists company(
 
 --changeset belchonokizi:2
 CREATE TABLE IF NOT EXISTS company_locales(
-    company_id INT REFERENCES company (id),
+    company_id INT REFERENCES company (id) ON DELETE CASCADE,
     lang varchar(2),
     description varchar(255) not null ,
     primary key (company_id, lang)
@@ -31,7 +31,7 @@ create table if not exists users(
 create table if not exists payment(
     id bigserial primary key ,
     amount int not null ,
-    receiver_id bigint not null references users (id)
+    receiver_id bigint not null references users (id) ON DELETE CASCADE
 );
 
 --changeset belchonokizi:5
@@ -43,7 +43,7 @@ create table if not exists chat(
 --changeset belchonokizi:6
 CREATE TABLE IF NOT EXISTS users_chat(
     id BIGSERIAL PRIMARY KEY ,
-    user_id bigint not null references users(id),
-    chat_id bigint not null references chat (id),
+    user_id bigint not null references users(id) ON DELETE CASCADE,
+    chat_id bigint not null references chat (id) ON DELETE CASCADE,
     unique (user_id, chat_id)
 );

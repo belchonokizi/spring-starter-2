@@ -1,7 +1,7 @@
 package com.dmdev.spring.service;
 
 import com.dmdev.spring.database.repository.CompanyRepository;
-import com.dmdev.spring.dto.CompanyReadDTO;
+import com.dmdev.spring.dto.CompanyReadDto;
 import com.dmdev.spring.listener.entity.AccessType;
 import com.dmdev.spring.listener.entity.EntityEvent;
 import lombok.RequiredArgsConstructor;
@@ -17,11 +17,11 @@ public class CompanyService {
     private final UserService userService;
     private final ApplicationEventPublisher publisher;
 
-    public Optional<CompanyReadDTO> findById(Integer id) {
+    public Optional<CompanyReadDto> findById(Integer id) {
         return companyRepository.findById(id)
                 .map(entity -> {
                     publisher.publishEvent(new EntityEvent(entity, AccessType.READ));
-                    return new CompanyReadDTO(entity.getId());
+                    return new CompanyReadDto(entity.getId(), null);
                 });
     }
 }

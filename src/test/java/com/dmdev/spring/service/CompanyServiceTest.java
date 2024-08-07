@@ -2,7 +2,7 @@ package com.dmdev.spring.service;
 
 import com.dmdev.spring.database.entity.Company;
 import com.dmdev.spring.database.repository.CompanyRepository;
-import com.dmdev.spring.dto.CompanyReadDTO;
+import com.dmdev.spring.dto.CompanyReadDto;
 import com.dmdev.spring.listener.entity.EntityEvent;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -39,11 +39,11 @@ class CompanyServiceTest {
         when(companyRepository.findById(COMPANY_ID))
                 .thenReturn(Optional.of(new Company(COMPANY_ID, null, Collections.emptyMap())));
 
-        Optional<CompanyReadDTO> actualResult = companyService.findById(COMPANY_ID);
+        Optional<CompanyReadDto> actualResult = companyService.findById(COMPANY_ID);
 
         assertTrue(actualResult.isPresent());
 
-        CompanyReadDTO expectedResult = new CompanyReadDTO(COMPANY_ID);
+        CompanyReadDto expectedResult = new CompanyReadDto(COMPANY_ID, null);
 
         actualResult.ifPresent(actual -> assertEquals(expectedResult, actual));
 

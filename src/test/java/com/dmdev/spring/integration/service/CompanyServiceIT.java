@@ -1,16 +1,11 @@
 package com.dmdev.spring.integration.service;
 
 import com.dmdev.spring.config.DatabaseProperties;
-import com.dmdev.spring.dto.CompanyReadDTO;
+import com.dmdev.spring.dto.CompanyReadDto;
 import com.dmdev.spring.integration.annotation.IT;
 import com.dmdev.spring.service.CompanyService;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.TestConstructor;
-import org.springframework.test.context.TestConstructor.AutowireMode;
 
 import java.util.Optional;
 
@@ -40,11 +35,11 @@ public class CompanyServiceIT {
     @Test
     void test() {
 
-        Optional<CompanyReadDTO> actualResult = companyService.findById(COMPANY_ID);
+        Optional<CompanyReadDto> actualResult = companyService.findById(COMPANY_ID);
 
         assertTrue(actualResult.isPresent());
 
-        CompanyReadDTO expectedResult = new CompanyReadDTO(COMPANY_ID);
+        CompanyReadDto expectedResult = new CompanyReadDto(COMPANY_ID, null);
 
         actualResult.ifPresent(actual -> assertEquals(expectedResult, actual));
     }
