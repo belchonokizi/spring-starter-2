@@ -1,11 +1,15 @@
 package com.dmdev.spring.http.controller;
 
+import com.dmdev.spring.database.entity.Role;
 import com.dmdev.spring.dto.UserReadDto;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 @RequestMapping("/api/v1")
@@ -13,21 +17,25 @@ import javax.servlet.http.HttpServletRequest;
 @SessionAttributes({"user"})
 public class GreetingController {
 
+    //вызывается на каждый запрос
+    @ModelAttribute("roles")
+    public List<Role> roles() {
+        return Arrays.asList(Role.values());
+    }
+
     @GetMapping("/hello")
-    public ModelAndView hello(ModelAndView modelAndView,
-                              HttpServletRequest request) {
-        modelAndView.setViewName("greeting/hello");
-        //атрибут на уровне реквеста, если над классом нет @SessionAttributes({"user"})
-        modelAndView.addObject("user", new UserReadDto(1L, "Ivan"));
-        return modelAndView;
+    public String hello(Model model,
+                        HttpServletRequest request,
+                        UserReadDto userReadDto) {
+        model.addAttribute("user", new UserReadDto(1L, "Ivan"));
+        return "greeting/hello";
     }
 
     @GetMapping("/bye")
-    public ModelAndView bye(ModelAndView modelAndView,
+    public String bye(ModelAndView modelAndView,
                             //получаем сессионный атрибут
                             @SessionAttribute("user") UserReadDto user) {
-        modelAndView.setViewName("greeting/bye");
-        return modelAndView;
+        return "greeting/bye";
     }
 
     @GetMapping("/hello/{id}")
