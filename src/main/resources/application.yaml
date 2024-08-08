@@ -21,6 +21,9 @@ db:
 
 spring:
   mvc:
+#    1 способ - задаем формат дат при отправке запросов
+    format:
+      date: iso
     view:
       prefix: /WEB-INF/jsp/
       suffix: .jsp
