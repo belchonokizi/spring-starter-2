@@ -5,6 +5,7 @@
     <title>Hello</title>
 </head>
 <body>
-  Hello ${requestScope.userReadDto.username}!
+    <p>Hello <span th:text="${userReadDto.username}">Dummy text</span>!</p>
+
 </body>
 </html>

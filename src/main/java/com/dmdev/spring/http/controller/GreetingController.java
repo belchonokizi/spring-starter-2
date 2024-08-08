@@ -27,7 +27,7 @@ public class GreetingController {
     public String hello(Model model,
                         HttpServletRequest request,
                         UserReadDto userReadDto) {
-        model.addAttribute("user", new UserReadDto(1L, "Ivan", null, null, null, null, null));
+        model.addAttribute("user", userReadDto);
         return "greeting/hello";
     }
 
