@@ -36,6 +36,8 @@ spring:
       show_sql: true
       format_sql: true
       hbm2ddl.auto: validate
+#      чтобы транзакция не открывалась на уровне контроллеров, а только на уровне сервисов
+    open-in-view: false
 
 logging:
   level:
