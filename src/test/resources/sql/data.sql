@@ -5,6 +5,12 @@ VALUES (1, 'Google'),
 
 SELECT SETVAL('company_id_seq', (SELECT MAX(id) FROM company));
 
+select
+    c.company_name,
+    c."id"
+from
+    company c;
+
 INSERT INTO company_locales (company_id, lang, description)
 VALUES ((SELECT id FROM company WHERE company_name = 'Google'), 'en', 'Google description'),
        ((SELECT id FROM company WHERE company_name = 'Google'), 'ru', 'Google описание'),
