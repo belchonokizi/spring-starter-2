@@ -7,6 +7,8 @@ import com.dmdev.spring.dto.UserFilter;
 import com.dmdev.spring.dto.UserReadDto;
 import com.dmdev.spring.service.CompanyService;
 import com.dmdev.spring.service.UserService;
+import com.dmdev.spring.validation.group.CreateAction;
+import com.dmdev.spring.validation.group.UpdateAction;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +20,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.validation.groups.Default;
 
 @Controller
 @RequestMapping("users")
@@ -60,7 +64,7 @@ public class UserController {
 
     @PostMapping
 //    @ResponseStatus(HttpStatus.CREATED)
-    public String create(@Validated UserCreateEditDto user,
+    public String create(@Validated({Default.class, CreateAction.class}) UserCreateEditDto user,
 //                        хранит ошибки, должен идти сразу после валидируемого объекта
                          BindingResult bindingResult,
                          RedirectAttributes redirectAttributes) {
@@ -76,7 +80,7 @@ public class UserController {
     //    @PutMapping("/{id}")
     @PostMapping("/{id}/update")
     public String update(@PathVariable("id") Long id,
-                         @Validated UserCreateEditDto user) {
+                         @Validated({Default.class, UpdateAction.class}) UserCreateEditDto user) {
         return userService.update(id, user)
                 .map(it -> "redirect:/users/{id}")
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
