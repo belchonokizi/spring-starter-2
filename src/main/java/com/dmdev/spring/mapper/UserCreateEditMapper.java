@@ -8,11 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.lang.model.util.SimpleAnnotationValueVisitor6;
 import java.util.Optional;
-import java.util.function.Predicate;
 
-import static java.util.function.Predicate.*;
+import static java.util.function.Predicate.not;
 
 @Component
 @RequiredArgsConstructor
