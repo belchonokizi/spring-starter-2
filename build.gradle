@@ -1,15 +1,15 @@
 plugins {
     id 'org.springframework.boot' version '2.6.2'
-    id "io.spring.dependency-management" version '1.0.11.RELEASE'
-    id "io.freefair.lombok" version "6.3.0"
-    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'io.freefair.lombok' version '6.3.0'
+    id 'com.ewerk.gradle.plugins.querydsl' version '1.0.10'
     id 'java'
 }
 
 apply from: 'version.gradle'
 
-group 'org.example'
-version '1.0-SNAPSHOT'
+group = 'org.example'
+version = '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
@@ -23,14 +23,14 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
     implementation 'org.postgresql:postgresql'
     implementation 'org.springframework.data:spring-data-envers'
     implementation 'com.querydsl:querydsl-jpa'
+    implementation 'com.querydsl:querydsl-core'
     implementation 'org.liquibase:liquibase-core'
-    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
-    implementation "org.springdoc:springdoc-openapi-ui:${versions.springdoc}"
 
     annotationProcessor 'com.querydsl:querydsl-apt'
 
@@ -49,10 +49,5 @@ compileQuerydsl {
 }
 
 test {
-    //работаем с JUnit 5
     useJUnitPlatform()
-}
-
-wrapper {
-    gradleVersion '7.3'
 }

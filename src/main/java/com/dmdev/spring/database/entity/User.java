@@ -43,6 +43,7 @@ public class User extends AuditingEntity<Long> {
     private String firstname;
 
     private String lastname;
+    private String image;
 
     //для перевода енама в строку
     @Enumerated(EnumType.STRING)
