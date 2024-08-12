@@ -8,16 +8,17 @@ import org.springframework.stereotype.Service;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
+import java.util.Optional;
 
-import static java.nio.file.Files.*;
-import static java.nio.file.StandardOpenOption.*;
+import static java.nio.file.Files.write;
+import static java.nio.file.StandardOpenOption.CREATE;
+import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
 
 @Service
 @RequiredArgsConstructor
 public class ImageService {
 
-    @Value("${app.image.bucket:\\Users\\Ильзира\\IdeaProjects\\spring-starter-2\\images}")
+    @Value("${app.image.bucket:c:\\Users\\Ильзира\\IdeaProjects\\spring-starter-2\\images}")
     String bucket;
 
 
@@ -29,5 +30,13 @@ public class ImageService {
             Files.createDirectories(fullImagePath.getParent());
             write(fullImagePath, content.readAllBytes(), CREATE, TRUNCATE_EXISTING);
         }
+    }
+
+    @SneakyThrows
+    public Optional<byte[]> get(String imagePath) {
+        Path fullImagePath = Path.of(bucket, imagePath);
+        return Files.exists(fullImagePath)
+                ? Optional.of(Files.readAllBytes(fullImagePath))
+                : Optional.empty();
     }
 }
