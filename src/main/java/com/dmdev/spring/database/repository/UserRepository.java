@@ -3,8 +3,6 @@ package com.dmdev.spring.database.repository;
 import com.dmdev.spring.database.entity.Role;
 import com.dmdev.spring.database.entity.User;
 import com.dmdev.spring.dto.PersonalInfo2;
-import javax.persistence.LockModeType;
-import javax.persistence.QueryHint;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -13,6 +11,8 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.history.RevisionRepository;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.LockModeType;
+import javax.persistence.QueryHint;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -73,4 +73,5 @@ public interface UserRepository extends JpaRepository<User, Long>,
             nativeQuery = true)
     List<PersonalInfo2> findAllByCompanyId(Integer companyId);
 
+    Optional<User> findByUsername(String username);
 }
