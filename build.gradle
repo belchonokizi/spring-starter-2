@@ -26,9 +26,10 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation "org.springdoc:springdoc-openapi-ui:${versions.springdoc}"
+    implementation 'org.springframework.data:spring-data-envers'
     implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
     implementation 'org.postgresql:postgresql'
-    implementation 'org.springframework.data:spring-data-envers'
     implementation 'com.querydsl:querydsl-jpa'
     implementation 'com.querydsl:querydsl-core'
     implementation 'org.liquibase:liquibase-core'
