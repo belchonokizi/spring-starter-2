@@ -18,6 +18,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
 //                .httpBasic(Customizer.withDefaults());
 //                переопределяем свою страничку логина
+                .logout(logout -> logout
+                        //действия ниже с logout происходят по умолчанию
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login")
+                        .deleteCookies("JSESSIONID"))
                 .formLogin(login -> login.loginPage("/login")
                         .defaultSuccessUrl("/users")
                         //даем разрешение для логина всем
