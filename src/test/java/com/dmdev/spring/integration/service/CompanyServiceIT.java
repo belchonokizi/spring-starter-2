@@ -14,8 +14,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * для интеграции JUnit5 и спрингового TestContext
- * @ExtendWith(SpringExtension.class)
- * указываем, какой именно appContext используем
+ *
+ * @ExtendWith(SpringExtension.class) указываем, какой именно appContext используем
  * @ContextConfiguration(classes = ApplicationRunner.class,
  * для чтения yaml файлов
  * initializers = ConfigDataApplicationContextInitializer.class)
@@ -33,6 +33,7 @@ public class CompanyServiceIT {
     private final DatabaseProperties databaseProperties;
 
     @Test
+        //todo: fix test
     void test() {
 
         Optional<CompanyReadDto> actualResult = companyService.findById(COMPANY_ID);

@@ -2,6 +2,7 @@ package com.dmdev.spring.integration;
 
 import com.dmdev.spring.integration.annotation.IT;
 import org.junit.jupiter.api.BeforeAll;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.context.jdbc.Sql;
@@ -12,6 +13,8 @@ import org.testcontainers.containers.PostgreSQLContainer;
 @Sql({
         "classpath:sql/data.sql"
 })
+//    2-ой способ установить пользователя в тест
+@WithMockUser(username = "test@gmail.com", password = "test", authorities = {"ADMIN, USER"})
 public abstract class IntegrationTestBase {
     //указываем тег докер имеджа
     private static final PostgreSQLContainer<?> container =
