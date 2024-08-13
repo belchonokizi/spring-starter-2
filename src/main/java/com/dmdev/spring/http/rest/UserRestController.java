@@ -59,7 +59,6 @@ public class UserRestController {
                 .orElseGet(notFound()::build);
     }
 
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public UserReadDto create(@Validated({Default.class, CreateAction.class}) @RequestBody UserCreateEditDto user) {
