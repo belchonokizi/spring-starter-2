@@ -22,6 +22,12 @@ db:
 springdoc:
   swagger-ui:
     path: /
+#    подключение oauth2 к swagger
+    oauth2:
+#      clientId:
+#      clientSecret:
+      scope: openid, email, profile
+    oauth2-redirect-url: http://localhost:8080/swagger-ui/oauth2-redirect.html
 
 spring:
   mvc:
@@ -31,7 +37,16 @@ spring:
     view:
       prefix: /WEB-INF/jsp/
       suffix: .jsp
-
+  security:
+#    подключение oauth2
+    oauth2:
+      client:
+        registration:
+          google:
+#            clientId:
+#            clientSecret:
+            redirectUri: http://localhost:8080/login/oauth2/code/google
+            scope: openid, email, profile
   datasource:
     url: jdbc:postgresql://localhost:5433/postgres
     username: postgres
