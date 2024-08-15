@@ -47,11 +47,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         .deleteCookies("JSESSIONID"))
                 .formLogin(login -> login
                         .loginPage("/login")
-                        .defaultSuccessUrl("/users"))
-                .oauth2Login(config -> config
-                        .loginPage("/login")
-                        .defaultSuccessUrl("/users")
-                        .userInfoEndpoint(userInfo -> userInfo.oidcUserService(oidcUserService())));
+                        .defaultSuccessUrl("/users"));
+//                .oauth2Login(config -> config
+//                        .loginPage("/login")
+//                        .defaultSuccessUrl("/users")
+//                        .userInfoEndpoint(userInfo -> userInfo.oidcUserService(oidcUserService())));
     }
 
     //соотносим дефолтного юзера oauth2 с нашим юзером
